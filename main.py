@@ -1,13 +1,18 @@
 #main.py
 
-import json
 
-with open ('data.json', 'r') as f:
-    contents = f.read()
-    data = json.loads(contents)
+
+
 
 def main():
+    import json
 
-    for category in main.keys():
-        print(main[category])
-    user_input = input('What category would you like to explore')
+    with open ('data.json', 'r') as f:
+        contents = f.read()
+        data = json.loads(contents)
+
+#    data = json.loads(contents)
+    user_input = input('What category would you like to explore? ')
+    for category in data.keys():
+        print(data[category])
+main()
