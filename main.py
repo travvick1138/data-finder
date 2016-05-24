@@ -1,5 +1,19 @@
 #main.py
 
+def first_prompt():
+    """Get top level key or list from the user
+
+    >>>first_prompt('Thai'):
+    This will prompt for the child Key
+
+    >>>first_prompt('AFC'):
+    This will prompt for the child Key
+
+    >>>first_prompt('Romantic Comedy'):
+    This will prompt for the child Key
+    """
+
+
 
 
 
