@@ -1,6 +1,7 @@
 # main.py
 
 def first_prompt(parent_keys):
+
     """Get top level key or list from the user
 
     >>>first_prompt('Thai'):
@@ -46,15 +47,23 @@ def final_prompt(y, n):
 
 
 def main():
+
+    """ main gets the initial category imported from data: """
+
+
     import json
 
     with open('data.json', 'r') as f:
         contents = f.read()
         data = json.loads(contents)
 
-    user_input = input('What category would you like to explore? ')
     for category in data.keys():
-        print(data[category])
+        keys = data.keys()
+        user_input = input('What category would you like to explore? {data}'.format(
+
+            data=keys
+            ))
+
 main()
 
 if __name__ == '__main__':
