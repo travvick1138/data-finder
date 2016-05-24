@@ -1,6 +1,6 @@
 # main.py
 
-def first_prompt(parent_keys):
+def first_prompt(user_input):
 
     """Get top level key or list from the user
 
@@ -13,7 +13,20 @@ def first_prompt(parent_keys):
     >>>first_prompt('Romantic Comedy'):
     This will prompt for the child Key
     """
+    import json
 
+    with open('data.json', 'r') as f:
+        contents = f.read()
+        data = json.loads(contents)
+
+    for first_prompt in data[user_input]['strings'].keys():
+        parent_keys = data[user_input]['data'].keys()
+        question = data[user_input]['strings']['first_prompt']
+
+    user_input_1 = input('{question}'.format(
+
+        question=question
+    ))
 
 def second_prompt(child_keys):
     """ prompt for child key
@@ -59,11 +72,13 @@ def main():
 
     for category in data.keys():
         keys = data.keys()
-        user_input = input('What category would you like to explore? {data}'.format(
 
-            data=keys
+        user_input = input('What category would you like to explore? {data} '.format(
+
+            data=', '.join(keys)
             ))
 
+        first_prompt(user_input)
 main()
 
 if __name__ == '__main__':
