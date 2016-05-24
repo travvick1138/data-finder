@@ -1,6 +1,6 @@
-#main.py
+# main.py
 
-def first_prompt():
+def first_prompt(parent_keys):
     """Get top level key or list from the user
 
     >>>first_prompt('Thai'):
@@ -14,7 +14,7 @@ def first_prompt():
     """
 
 
-def second_prompt():
+def second_prompt(child_keys):
     """ prompt for child key
 
     >>>second_prompt('Yellow Curry'):
@@ -29,18 +29,35 @@ def second_prompt():
     """
 
 
+def final_prompt(y, n):
+    """for users to continue search
 
+    >>>final_prompt(user_input):
+    y = yes
+    n = no
+        user_input = input("Would you like another search? " ,y,n)
+
+        if user_input == y:
+            main()
+        else:
+            print("Goodbye")
+               exit
+               """
 
 
 def main():
     import json
 
-    with open ('data.json', 'r') as f:
+    with open('data.json', 'r') as f:
         contents = f.read()
         data = json.loads(contents)
 
-#    data = json.loads(contents)
     user_input = input('What category would you like to explore? ')
     for category in data.keys():
         print(data[category])
 main()
+
+if __name__ == '__main__':
+    import doctest
+
+    doctest.testmod()
