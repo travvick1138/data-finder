@@ -4,14 +4,14 @@ def first_prompt(user_input):
 
     """Get top level key or list from the user
 
-    >>>first_prompt('Thai'):
-    This will prompt for the child Key
+    >>>first_prompt('Food'):
+    'Enter the name of a cuisine ('Thai', 'Mexican', 'Italian', 'Indian') or an ingredient: '
 
-    >>>first_prompt('AFC'):
-    This will prompt for the child Key
+    >>>first_prompt('Football'):
+    'Enter the name of a conference ('AFC', NFC) or team: '
 
-    >>>first_prompt('Romantic Comedy'):
-    This will prompt for the child Key
+    >>>first_prompt('Movies'):
+    'Enter the name of a movie genre ('Action Thriller', 'Sci-Fi', 'Comedy', 'Romantic Comedy') or actor: '
     """
     import json
 
@@ -28,7 +28,9 @@ def first_prompt(user_input):
         question=question
     ))
 
-def second_prompt(child_keys):
+    second_prompt(user_input_1, user_input)
+
+def second_prompt(user_input, user_input_1):
     """ prompt for child key
 
     >>>second_prompt('Yellow Curry'):
@@ -42,6 +44,20 @@ def second_prompt(child_keys):
 
     """
 
+    import json
+
+    with open('data.json', 'r') as f:
+        contents = f.read()
+        data = json.loads(contents)
+
+    for second_prompt in data[user_input]['strings'][user_input_1].keys():
+        child_keys = data[user_input]['data'][user_input_1]
+        question = data[user_input]['strings']['second_prompt']
+
+    user_input_2 = input('{question}'.format(
+
+        question=question
+    ))
 
 def final_prompt(y, n):
     """for users to continue search
