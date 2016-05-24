@@ -14,6 +14,20 @@ def first_prompt():
     """
 
 
+def second_prompt():
+    """ prompt for child key
+
+    >>>second_prompt('Yellow Curry'):
+    'The following are ingredients in the {parent_key} dish {child_key}:\n• {items}'
+
+    >>>second_prompt('West'):
+    'The following are the teams in the {parent_key} {child_key}:\n• {items}'
+
+    >>>second_prompt('The Princess Bride'):
+    'The following actors are in {child_key} ({parent_key}):\n• {items}'
+
+    """
+
 
 
 
