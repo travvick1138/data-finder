@@ -7,7 +7,7 @@ with open('data.json', 'r') as f:
     data = json.loads(contents)
 
 def build_a_string(category):
-    """Build strings for each question pulling in any data as needed
+    """Build strings for first_prompt and pulling in any data as needed
 
     >>>build_a_string("Food")
     'Enter the name of a cuisine ('Thai', 'Mexican', 'Italian', 'Indian') or an ingredient: '
@@ -24,34 +24,29 @@ def build_a_string(category):
 def first_prompt(key):
     user_input = input(build_a_string(key))
 
-    second_prompt(user_input)
+    second_prompt(key, user_input)
 
     return build_a_string(key)
 
 
-def second_prompt(parent_key):
-    """ prompt for child key
+def build_another_string(category, parent_key):
+    """Build string for second_prompt and pulling any data as needed
 
-    >>>second_prompt('Yellow Curry'):
-    'The following are ingredients in the {parent_key} dish {child_key}:\n• {items}'
-
-    >>>second_prompt('West'):
-    'The following are the teams in the {parent_key} {child_key}:\n• {items}'
-
-    >>>second_prompt('The Princess Bride'):
-    'The following actors are in {child_key} ({parent_key}):\n• {items}'
-
+    >>>build_another_string("Food", "Indian")
+    'Enter the name of a dish ('Palak Paneer'): '
     """
+    value_list = list(data[category]["data"][parent_key].keys())
+    value_list.sort()
+
+    return data[category]["strings"]['second_prompt'].format(
+        child_keys=', '.join(value_list)
+    )
 
 
-    for second_prompt in data[user_input]['strings'][user_input_1].keys():
-        child_keys = data[user_input]['data'][user_input_1]
-        question = data[user_input]['strings']['second_prompt']
+def second_prompt(category, parent_key):
+    user_input = input(build_another_string(category, parent_key))
 
-    user_input_2 = input('{question}'.format(
-
-        question=question
-    ))
+    return build_another_string(category, parent_key)
 
 def final_prompt(y, n):
     """for users to continue search
