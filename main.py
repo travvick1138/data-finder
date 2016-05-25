@@ -1,36 +1,35 @@
 # main.py
 
-def first_prompt(user_input):
+import json
 
-    """Get top level key or list from the user
+with open('data.json', 'r') as f:
+    contents = f.read()
+    data = json.loads(contents)
 
-    >>>first_prompt('Food'):
+def build_a_string(category):
+    """Build strings for each question pulling in any data as needed
+
+    >>>build_a_string("Food")
     'Enter the name of a cuisine ('Thai', 'Mexican', 'Italian', 'Indian') or an ingredient: '
-
-    >>>first_prompt('Football'):
-    'Enter the name of a conference ('AFC', NFC) or team: '
-
-    >>>first_prompt('Movies'):
-    'Enter the name of a movie genre ('Action Thriller', 'Sci-Fi', 'Comedy', 'Romantic Comedy') or actor: '
     """
-    import json
 
-    with open('data.json', 'r') as f:
-        contents = f.read()
-        data = json.loads(contents)
+    value_list = list(data[category]["data"].keys())
+    value_list.sort()
 
-    for first_prompt in data[user_input]['strings'].keys():
-        parent_keys = data[user_input]['data'].keys()
-        question = data[user_input]['strings']['first_prompt']
+    return data[category]["strings"]['first_prompt'].format(
+        parent_keys=', '.join(value_list)
+    )
 
-    user_input_1 = input('{question}'.format(
 
-        question=question
-    ))
+def first_prompt(key):
+    user_input = input(build_a_string(key))
 
-    second_prompt(user_input_1, user_input)
+    second_prompt(user_input)
 
-def second_prompt(user_input, user_input_1):
+    return build_a_string(key)
+
+
+def second_prompt(parent_key):
     """ prompt for child key
 
     >>>second_prompt('Yellow Curry'):
@@ -44,11 +43,6 @@ def second_prompt(user_input, user_input_1):
 
     """
 
-    import json
-
-    with open('data.json', 'r') as f:
-        contents = f.read()
-        data = json.loads(contents)
 
     for second_prompt in data[user_input]['strings'][user_input_1].keys():
         child_keys = data[user_input]['data'][user_input_1]
@@ -78,16 +72,17 @@ def final_prompt(y, n):
 def main():
 
     """ main gets the initial category imported from data: """
-
-
-    import json
-
-    with open('data.json', 'r') as f:
-        contents = f.read()
-        data = json.loads(contents)
+    #
+    #
+    # import json
+    #
+    # with open('data.json', 'r') as f:
+    #     contents = f.read()
+    #     data = json.loads(contents)
 
     for category in data.keys():
-        keys = data.keys()
+        keys = list(data.keys())
+        keys.sort()
 
         user_input = input('What category would you like to explore? {data} '.format(
 
