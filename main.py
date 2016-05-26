@@ -100,19 +100,16 @@ def output(category, parent_key, child_key):
     final_prompt()
 
 def final_prompt():
-    """for users to continue search
+    """for users to continue search"""
 
-    >>>final_prompt(user_input):
-    y = yes
-    n = no
-        user_input = input("Would you like another search? " ,y,n)
+    user_input = input("Would you like another search? " ,y,n)
 
-        if user_input == y:
+    if user_input == y:
             main()
-        else:
+    else:
             print("Goodbye")
-               exit
-               """
+            return None
+
 
 
 def main():
@@ -129,13 +126,14 @@ def main():
         ))
         if user_input in keys:
             first_prompt(user_input)
-        else:
+        elif user_input not in keys:
             print("We do not have the information you are looking for, please try again.")
             main()
-
+        else:
+            print("Goodbye")
+            return None
 
 main()
-
 # if __name__ == '__main__':
 #     import doctest
 #
