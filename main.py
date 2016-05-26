@@ -1,5 +1,9 @@
 # main.py
 
+# import sys
+
+
+
 import json
 
 with open('data.json', 'r') as f:
@@ -101,14 +105,17 @@ def output(category, parent_key, child_key):
 
 def final_prompt():
     """for users to continue search"""
+    y = True
+    # n = True
 
-    user_input = input("Would you like another search? " ,y,n)
+    user_input = input("Would you like another search? (y or n)")
 
     if user_input == y:
-            main()
-    else:
-            print("Goodbye")
-            return None
+                main()
+    # elif user_input == n:
+    #             break
+
+
 
 
 
