@@ -6,6 +6,7 @@ with open('data.json', 'r') as f:
     contents = f.read()
     data = json.loads(contents)
 
+
 def build_a_string(category):
     """Build strings for first_prompt and pulling in any data as needed
 
@@ -18,7 +19,38 @@ def build_a_string(category):
 
     return data[category]["strings"]['first_prompt'].format(
         parent_keys=', '.join(value_list)
-    )
+     )
+# def build_a_string(**kwargs):
+#     if kwargs in data.keys():
+#         category = kwargs
+#         keys = data[category]["data"]
+#         strings = data[category]["strings"]
+#         value_list = list(keys.keys())
+#         value_list.sort()
+#
+#         return strings['first_prompt'].format(
+#             parent_keys=', '.join(value_list)
+#         )
+#
+#     elif kwargs in data.keys():
+#         (category, parent_key) = kwargs
+#         keys = data[category]["data"]
+#         strings = data[category]["strings"]
+#         value_list = list(keys[parent_key].keys())
+#         value_list.sort()
+#         if parent_key not in keys.keys():
+#             print("We do not have the information you are looking for, please try again.")
+#             first_prompt(category)
+#
+#         return strings['second_prompt'].format(
+#             child_keys=', '.join(value_list)
+#         )
+#
+#
+#     else:
+#         kwargs not in data.keys()
+#         print("We do not have the information you are looking for, please try again.")
+#         main()
 
 
 def first_prompt(key):
@@ -45,8 +77,11 @@ def build_another_string(category, parent_key):
 
 def second_prompt(category, parent_key):
     user_input = input(build_another_string(category, parent_key))
+    #user_input = input(build_a_string(category, parent_key))
 
     return build_another_string(category, parent_key)
+    #return build_a_string(category, parent_key)
+
 
 def final_prompt(y, n):
     """for users to continue search
@@ -65,29 +100,27 @@ def final_prompt(y, n):
 
 
 def main():
+    """ main gets the initial category imported from data:
 
-    """ main gets the initial category imported from data: """
-    #
-    #
-    # import json
-    #
-    # with open('data.json', 'r') as f:
-    #     contents = f.read()
-    #     data = json.loads(contents)
-
+    """
     for category in data.keys():
         keys = list(data.keys())
         keys.sort()
 
-        user_input = input('What category would you like to explore? {data} '.format(
+        user_input = input('What category would you like to explore? ({data}): '.format(
 
             data=', '.join(keys)
-            ))
+        ))
+        if user_input in keys:
+            first_prompt(user_input)
+        else:
+            print("We do not have the information you are looking for, please try again.")
+            main()
 
-        first_prompt(user_input)
+
 main()
 
-if __name__ == '__main__':
-    import doctest
-
-    doctest.testmod()
+# if __name__ == '__main__':
+#     import doctest
+#
+#     doctest.testmod()
