@@ -79,11 +79,27 @@ def second_prompt(category, parent_key):
     user_input = input(build_another_string(category, parent_key))
     #user_input = input(build_a_string(category, parent_key))
 
+    output(category, parent_key, user_input)
+
     return build_another_string(category, parent_key)
     #return build_a_string(category, parent_key)
 
 
-def final_prompt(y, n):
+
+def output(category, parent_key, child_key):
+    """ list of ingredients for 2_inputs_outputs  """
+    value_list = list(data[category]["data"][parent_key][child_key])
+    value_list.sort()
+
+    print(data[category]["strings"]['two_inputs_output'].format(
+        parent_key=parent_key,
+        child_key=child_key,
+        items=('\n• '.join(value_list))
+    ))
+
+    final_prompt()
+
+def final_prompt():
     """for users to continue search
 
     >>>final_prompt(user_input):
