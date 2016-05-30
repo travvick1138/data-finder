@@ -105,25 +105,19 @@ def output(category, parent_key, child_key):
 
 def final_prompt():
     """for users to continue search"""
+
+
     while True:
 
         user_input = input("Would you like another search? (y or n)")
 
-        if user_input == 'n':
-            print("Goodbye")
-            break
 
 
-        elif user_input == 'y':
-                main()
+        if user_input == "n":
+            exit()
 
-        else:
-            print("Goodbye")
-            return None
-
-
-
-
+        elif user_input == "y":
+            return main()
 
 def main():
     """ main gets the initial category imported from data:
@@ -133,7 +127,8 @@ def main():
     keys = list(data.keys())
     keys.sort()
 
-    user_input = input('What category would you like to explore? ({data}): '.format(
+    user_input = input('What category would you like to explore?''\n'
+    ' ({data}): '.format(
 
         data=', '.join(keys)
     ))
@@ -147,9 +142,7 @@ def main():
         elif user_input not in keys:
             print("We do not have the information you are looking for, please try again.")
             main()
-        else:
-            print("Goodbye")
-            return None
+
 
 main()
 # if __name__ == '__main__':
