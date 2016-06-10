@@ -28,7 +28,12 @@ def search_for_list_item_and_return_parent_keys_and_child_keys(dataset, strings,
         # If `.index` succeeds, it returns a number between 0 and the index of the last item in the list
         # If it fails, it throws a ValueError
                 if dataset[parent_key][child_key].index(list_item) > -1:
-                    return print(parent_key, child_key)  # Return results as a tuple
+                    return print(strings['one_input_output'].format(
+                        list_item=list_item,
+                        parent_key=parent_key,
+                        child_key=child_key
+                    ))
+                 # Return results as a tuple
             except ValueError:
                 continue
 
