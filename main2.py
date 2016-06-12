@@ -1,9 +1,11 @@
 """ This is our second build of the data-finder project started by Travis and Jeff
-on 5.23.16. main2.py will have a larger main function to transform data and return it to the main function for processing. """
+on 5.23.16. main2.py will have a larger main function to transform data and return it to the main function for processing.
 
+"""
 
 def get_parent_key_or_ingredient(dataset, strings):
     """Pass along the primary key choices and give the opportunity to choose and ingredient
+
     """
     value_list = list(dataset)
     value_list.sort()
@@ -19,9 +21,7 @@ def search_for_list_item_and_return_parent_keys_and_child_keys(dataset, strings,
     if item == "":
         print("By pressing return without an answer you have chosen to quit. Goodbye!")
         return None, None
-    # while True:
-    #     try:
-    #         tuple_list = []
+
     for parent_key in dataset:
         for child_key in dataset[parent_key]:
             try:
@@ -38,24 +38,7 @@ def search_for_list_item_and_return_parent_keys_and_child_keys(dataset, strings,
                 continue
     quit()
 
-        #             if item not in dataset[parent_key][child_key]:
-        #                 print("We do not have the information you are looking for, please try again.")
-        #                 main()
-        #
-        #             elif item in dataset[parent_key][child_key]:
-        #                 tuple_list.append((parent_key, child_key))
-        #                 tuple_list.sort()
-        #                 string_list = ""
-        #                 for match in tuple_list:
-        #                     string_list += strings["one_input_output"].format(
-        #                                                         list_item=item,
-        #                                                         parent_key=match[0],
-        #                                                         child_key=match[1]
-        #                                                          ) + '\n'
-        #                 return print(string_list)
-        # except ValueError:
-        #     print("We do not have the information you are looking for, please try again.")
-        #     get_parent_key_or_ingredient(dataset, strings)
+
 def get_child_key_from_parent_key(dataset1, strings):
     """Return request for child key
     """
@@ -133,7 +116,3 @@ def main():
             output(dataset2, strings)
 
 main()
-# if __name__ == '__main__':
-#     import doctest
-#
-#     doctest.testmod()
